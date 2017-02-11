@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Article Look And Feel Prototype</title>
+	<title>Hack The Constitution</title>
 	<link rel="stylesheet" type="text/css" href="libs/bootstrap-theme.min.css">
-  <link rel="stylesheet" type="text/css" href="libs/bootstrap.css">
+  	<link rel="stylesheet" type="text/css" href="libs/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="libs/annotator.min.css">
 	<link rel="stylesheet" type="text/css" href="libs/font-awesome-4.7.0/css/font-awesome.css">
 	<link href="https://fonts.googleapis.com/css?family=Bree+Serif|Quicksand|Roboto+Slab|Slabo+27px" rel="stylesheet">
@@ -23,30 +23,20 @@
 	  left: 0;
 	  padding: 1rem;
 	  text-align: right;
-    font-size: 8px;
-    font-style: italic;
+      font-size: 8px;
+      font-style: italic;
 	}
-
-  .content {
-
-  }
-
-  .meta_info {
-    font-size: 10px;
-
-  }
 
 	</style>
 	<script type="text/javascript" src="libs/jquery.min.js"></script>
-  <script type="text/javascript" src="libs/bootstrap.min.js"></script>
-	<script type="text/javascript" src="libs/annotator-full.min.js"></script>
+  	<script type="text/javascript" src="libs/bootstrap.min.js"></script>
 
   <script>
   $(document).ready(function() {
-    var ann = new Annotator(document.body); 
   });
   </script>
 </head>
+
 <body>
 
 <!-- ====== -->
@@ -88,7 +78,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user" style="font-size: 18px;"></span><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="user_profile.html"><span class="fa fa-pencil"></span>  Profile</a></li>
+            <li><a href="#"><span class="fa fa-pencil"></span>  Profile</a></li>
             <li><a href="#"><span class="fa fa-sign-out"></span>  Logout</a></li>
           </ul>
         </li>
@@ -98,68 +88,54 @@
 </nav>
 
 
-<!-- ====== -->
-<!-- body -->
 <div class="container">
-
-  <!-- title -->
+ <!-- title -->
   <div class="title">
     <div class="page-header">
-      <h1>Article</h1>
-      <div class="meta_info">
-        <b>Date:</b> 11 February 2016, 
-        <b>Author:</b> Denver Naicker,  
-        <b>Category:</b> Constitution 
-      </div>
+      <h1>Hack The Constitution </h1>
     </div>
   </div>
 
-  <!-- datetime -->
-  
-
-  <!-- sub heading -->
-  <div class="sub_heading">
-   <h3>Abstract</h3>
-  </div>
-
-  <!-- author -->
- 
-
-  <!-- content -->
-  <div class="content">
-  <div>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </div>
-  <br/>
-  <div>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </div>
-  <br/>
-  <div>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </div>
+	<div class="row">
+		<div class="col-xs-1">
+			<label> Username </label>
+		</div>
+		<div class="col-xs-4">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">
+						<span class="fa fa-user"></span>
+					</div>
+					<input class="form-control"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+			<label> Password </label>
+		</div>
+		<div class="col-xs-4">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">
+						<span class="fa fa-lock"></span>
+					</div>
+					<input class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group pull-right">
+					<button class="btn btn-default"> <span class="fa fa-check"></span> Login</button>
+				</div>
+		</div>
+	</div>
+	<div class="row">
+			<div class="col-xs-1">
+				
+			</div>
+	</div>
 
 </div>
-
-<!-- ====== -->
-<!-- footer -->
-<div class="footer">Hack The Constitution 2017</strong></div>
-<!-- text input -->
 
 </body>
 </html>
