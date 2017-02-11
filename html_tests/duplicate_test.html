@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		.main_content {
+			position: absolute;
+			z-index: 1
+		}
+		.main_content_duplicated {
+			position: relative;
+			z-index: 0
+		}		
+	</style>
+	<script src="jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+		});
+	</script>
+</head>
+
+
+<body>
+<div class="main_content"> 
+<div>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolo
+</div>
+<div>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolo
+</div>
+
+</div>
+<div class="main_content_duplicated"> 
+
+<div>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolo
+</div>
+<div>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolo
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		.main_content {
+			position: absolute;
+			z-index: 1;
+		}
+		.main_content_duplicated {
+			position: relative;
+			z-index: 0;
+			color: white;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="libs/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="libs/bootstrap.css">
+	<script type="text/javascript" src="libs/jquery.min.js"></script>
+	<script type="text/javascript" src="libs/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('.main_content').clone().removeClass('main_content').addClass('main_content_duplicated').appendTo('body');
+
+
+			$('.main_content').on('mouseup', function(event) {
+				var new_txt = [];
+
+				//Get selected Text
+				if(document.getSelection().toString() != "")
+				{
+			    	var selected_text = document.getSelection().toString();		
+			    	//traverse to place in main_content
+			    	//search for the expression in the text and add at start index and end index
+
+			    	// console.log(selected_text);
+
+//index of is returning -1,
+
+			    	var entire_text = $('.main_content').text();
+
+
+			    	//can i seperate the text and the markup upon insert
+			    	//in terms of a displacement markup overlay
+			    	//of what is presented and its processed
+			    	//current markup on return but should not be during process
+			    	//unless each word is a tag and is then highlighted
+			    	//so highlight the words between the start and end offsets
+
+			    	//<span class="highlight">word</span>
+			    	//on startup do that for each word or have the doc saved as tags like that
+			    	//so do something that adds span class tags to each word and then saves it
+			    	//enable insert the highlight class between those words
+			    	//using jquery to create dom 
+
+			    	//start position of 
+			    	//all text untill that point
+			    	//how to get the end of that 
+			    	//plus the size of selected text end index
+			    	//index 
+			    	// console.log(document.getSelection().getRangeAt(0));
+
+			    	//in new_txt array retrieve all text untill start index
+
+
+			    	//this inserts the tags but the tags obtruse the content
+			    	//the lookup fails
+			    	new_txt.push($('.main_content_duplicated').html().substring(0, document.getSelection().getRangeAt(0).startOffset));
+			    	new_txt.push('<span style="background-color: yellow; font-weight: 600;">');
+			    	new_txt.push(selected_text);
+			    	new_txt.push('</span>');
+			    	new_txt.push($('.main_content_duplicated').html().substring(document.getSelection().getRangeAt(0).endOffset, entire_text.length));
+			    	
+
+			    	//remove text from main_content
+			    	$('.main_content_duplicated').empty();
+			    	//insert text to main_content
+			    	$('.main_content_duplicated').append(new_txt.join(''));
+
+
+			    	// {
+			    	// 	sakldksal;dkas
+			    	// 	[ 
+			    	// 		articl : "asdasd"
+			    	// 		section :
+			    	// 		{
+			    	// 			"asdsadksal;dksa;ld askl;dkas;ldk": 
+			    	// 			[
+			    	// 				{ user: asdklasl;dk },
+			    	// 				{ comment: sadsadjsaldjklas }
+			    	// 			]
+			    	// 		} 
+			    	// 	]
+			    	// 	"" : ""
+			    	// }
+
+			    	//parse mark-up 
+			    	//sadlksa;ldsakd;l<asdjlsakd>skadlkasl;dksa<skadl;askdl>
+			    	//
+			    	//$.ajax(
+			    	// {} <----, function()
+			    	// )
+				}
+
+			    //Decorate text
+			    //how to add tags before and after selected text?
+			    //replace text with new marked up text
+			    $('')
+			});
+			
+		});
+	</script>
+</head>
+<body>
+
+	<div class="main_content">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</div>
+</body>
+</html>
