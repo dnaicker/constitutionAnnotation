@@ -1,4 +1,8 @@
-
+.user_content_modal_body {
+  font-size:1.5em;
+  margin: 12px !important;  
+  
+}
   body {
       font-family: 'Roboto Slab', serif;
   }
@@ -39,3 +43,18 @@
   .paragraph {
     cursor: pointer;
   }
+::-webkit-scrollbar
+{
+  width: 5px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.3);
+}
