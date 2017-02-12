@@ -35,3 +35,7 @@
   .meta_info {
     font-size: 12px;
   }
+
+  .paragraph {
+    cursor: pointer;
+  }
