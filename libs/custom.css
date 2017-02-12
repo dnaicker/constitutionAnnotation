@@ -1,0 +1,37 @@
+
+  body {
+      font-family: 'Roboto Slab', serif;
+  }
+
+	.navbar {
+	font-family: 'Quicksand', serif;
+  }
+
+  h3 {
+    font-family: 'Bree Serif', serif;
+  }
+
+	.footer {
+	  position: flex;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  padding: 1rem;
+	  text-align: right;
+    font-size: 8px;
+    font-style: italic;
+	}
+
+  .content {
+    font-size: 18px;
+    font-weight: 200;
+  }
+
+  .title {
+      font-family: 'Bree Serif', serif;
+
+  }
+
+  .meta_info {
+    font-size: 12px;
+  }
