@@ -5,7 +5,9 @@
 	<link rel="stylesheet" type="text/css" href="libs/bootstrap-theme.min.css">
   <link rel="stylesheet" type="text/css" href="libs/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="libs/annotator.min.css">
-	<link rel="stylesheet" type="text/css" href="libs/font-awesome-4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="libs/font-awesome-4.7.0/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="libs/annotator.marginalia.css">
+
 	<link href="https://fonts.googleapis.com/css?family=Bree+Serif|Quicksand|Roboto+Slab|Slabo+27px" rel="stylesheet">
 	<style type="text/css">
 
@@ -37,10 +39,6 @@
     font-weight: 200;
   }
 
-  .header {
-
-  }
-
   .title {
       font-family: 'Bree Serif', serif;
 
@@ -48,7 +46,6 @@
 
   .meta_info {
     font-size: 12px;
-    /*font-style: italic;*/
   }
 
 	</style>
@@ -56,9 +53,59 @@
   <script type="text/javascript" src="libs/bootstrap.min.js"></script>
 	<script type="text/javascript" src="libs/annotator-full.min.js"></script>
 
+  <script src="libs/bootstrap.dropdown.js"></script>
+  <script src="libs/moment.min.js"></script>
+  <script src="libs/annotator.marginalia.js"></script>
+    
+
+
+  <link rel="stylesheet" type="text/css" href="http://emory-lits-labs.github.io/annotator-marginalia/build/0.4.0/annotator.marginalia.min.css" />
+
+  <!-- <script type="text/javascript" src="http://emory-lits-labs.github.io/annotator-marginalia/src/scripts/bootstrap.dropdown.js"></script> -->
+
+  <script type="text/javascript" src="http://emory-lits-labs.github.io/annotator-marginalia/build/0.4.0/annotator.marginalia.min.js"></script>
+
+
   <script>
   $(document).ready(function() {
-    var ann = new Annotator(document.body); 
+    if (typeof annotator === 'undefined') {
+        alert("Oops! it looks like you haven't built Annotator. " +
+              "Either download a tagged release from GitHub, or build the " +
+              "package by running `make`");
+      } else {
+
+    function generate_id() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+        // set fake date, id, and author in order to demonstrate footer,
+        // since demo operates without an annotate store
+        var fakeData = function () {
+          return {
+            beforeAnnotationCreated: function (ann) {
+              ann.updated = new Date();
+              ann.user = 'anon';
+              ann.id = generate_id();
+            }
+          };
+        };
+
+        var _marginalia = annotatorMarginalia();
+        var app = new annotator.App()
+          .include(annotator.ui.main)
+          .include(fakeData)
+          .include(annotatorMarginalia, {
+            show_update_date: true,
+            show_author: true
+          });
+
+        app.start();
+
+        // simulate empty data load since demo has no annotation store
+        _marginalia.annotationsLoaded([]);
+
+      }
   });
   </script>
 </head>
@@ -85,11 +132,11 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">News <span class="sr-only">(current)</span></a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Articles <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
+              <li><a href="#">Theme 1</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
+              <li><a href="#">Theme 2</a></li>
             </ul>
           </li>
         </ul>
