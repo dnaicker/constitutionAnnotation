@@ -18,7 +18,7 @@ $(document).ready(function()
 		$(this).css({'background-color': 'yellow', 'text-decoration': 'underline'});
 
 		var build_dialog_dynamically = [];
-		build_dialog_dynamically.push('<div id="myModal" class="modal" role="dialog">');
+		build_dialog_dynamically.push('<div id="myModal" class="modal" role="dialog" tabindex="-1">');
 		build_dialog_dynamically.push('<div class="modal-dialog modal-lg">');
 		build_dialog_dynamically.push('<div class="modal-content modalheader">');
 		build_dialog_dynamically.push('<div class="modal-header" style="border: none">');
