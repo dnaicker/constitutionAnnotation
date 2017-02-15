@@ -4,14 +4,12 @@
     }
  }
 
-/* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) { 
     .searchbar {
         width: 100%;   
     }
 }
 
-/* Large devices (large desktops, 1200px and up) */
 @media (min-width: @screen-lg-min) { 
     .searchbar {
         width: 150%;
@@ -72,9 +70,7 @@ h3 {
 
 ::-webkit-scrollbar {
     width: 5px;
-    /* for vertical scrollbars */
     height: 12px;
-    /* for horizontal scrollbars */
 }
 
 ::-webkit-scrollbar-track {

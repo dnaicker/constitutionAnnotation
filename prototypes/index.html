@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Article Look And Feel Prototype</title>
+	<link rel="stylesheet" type="text/css" href="libs/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="libs/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="libs/annotator.min.css">
+  <link rel="stylesheet" type="text/css" href="libs/font-awesome-4.7.0/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="libs/annotator.marginalia.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Bree+Serif|Quicksand|Roboto+Slab|Slabo+27px" rel="stylesheet">
+	<style type="text/css">
+
+  body {
+      font-family: 'Roboto Slab', serif;
+  }
+
+	.navbar {
+	font-family: 'Quicksand', serif;
+  }
+
+  h3 {
+    font-family: 'Bree Serif', serif;
+  }
+
+	.footer {
+	  position: flex;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  padding: 1rem;
+	  text-align: right;
+    font-size: 8px;
+    font-style: italic;
+	}
+
+  .content {
+    font-size: 18px;
+    font-weight: 200;
+  }
+
+  .title {
+      font-family: 'Bree Serif', serif;
+
+  }
+
+  .meta_info {
+    font-size: 12px;
+  }
+
+	</style>
+	<script type="text/javascript" src="libs/jquery.min.js"></script>
+  <script type="text/javascript" src="libs/bootstrap.min.js"></script>
+	<script type="text/javascript" src="libs/annotator-full.min.js"></script>
+
+  <script src="libs/bootstrap.dropdown.js"></script>
+  <script src="libs/moment.min.js"></script>
+  <script src="libs/annotator.marginalia.js"></script>
+    
+
+
+  <link rel="stylesheet" type="text/css" href="http://emory-lits-labs.github.io/annotator-marginalia/build/0.4.0/annotator.marginalia.min.css" />
+
+  <!-- <script type="text/javascript" src="http://emory-lits-labs.github.io/annotator-marginalia/src/scripts/bootstrap.dropdown.js"></script> -->
+
+  <script type="text/javascript" src="http://emory-lits-labs.github.io/annotator-marginalia/build/0.4.0/annotator.marginalia.min.js"></script>
+
+
+  <script>
+  $(document).ready(function() {
+    if (typeof annotator === 'undefined') {
+        alert("Oops! it looks like you haven't built Annotator. " +
+              "Either download a tagged release from GitHub, or build the " +
+              "package by running `make`");
+      } else {
+
+    function generate_id() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+        // set fake date, id, and author in order to demonstrate footer,
+        // since demo operates without an annotate store
+        var fakeData = function () {
+          return {
+            beforeAnnotationCreated: function (ann) {
+              ann.updated = new Date();
+              ann.user = 'anon';
+              ann.id = generate_id();
+            }
+          };
+        };
+
+        var _marginalia = annotatorMarginalia();
+        var app = new annotator.App()
+          .include(annotator.ui.main)
+          .include(fakeData)
+          .include(annotatorMarginalia, {
+            show_update_date: true,
+            show_author: true
+          });
+
+        app.start();
+
+        // simulate empty data load since demo has no annotation store
+        _marginalia.annotationsLoaded([]);
+
+      }
+  });
+  </script>
+</head>
+<body>
+
+<!-- ====== -->
+<!-- header -->
+<div class="header">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><span class="fa fa-balance-scale"></span></a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">News <span class="sr-only">(current)</span></a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Theme 1</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Theme 2</a></li>
+            </ul>
+          </li>
+        </ul>
+        <!-- search -->
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user" style="font-size: 18px;"></span><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="user_profile.html"><span class="fa fa-pencil"></span>  Profile</a></li>
+              <li><a href="#"><span class="fa fa-sign-out"></span>  Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+</div>
+
+<!-- ====== -->
+<!-- body -->
+<div class="container">
+
+  <!-- title -->
+  <div class="title">
+    <div class="page-header">
+      <h1>Article</h1>
+      <div class="meta_info">
+        <b>Date:</b> 11/02/2017 -
+        <b>Author:</b> Denver Naicker -
+        <b>Category:</b> Constitution 
+      </div>
+    </div>
+  </div>
+
+  <!-- datetime -->
+  
+
+  <!-- sub heading -->
+  <div class="sub_heading">
+   <h3>Abstract</h3>
+  </div>
+
+  <!-- author -->
+ 
+
+  <!-- content -->
+  <div class="content">
+  <div>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </div>
+  <br/>
+  <div>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </div>
+  <br/>
+  <div>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </div>
+
+</div>
+
+<!-- ====== -->
+<!-- footer -->
+<div class="footer">Hack The Constitution 2017</strong></div>
+<!-- text input -->
+
+</body>
+</html>
