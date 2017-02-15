@@ -1,10 +1,30 @@
+@media (min-width: @screen-sm-min) { 
+    .searchbar {
+        width: 50%;
+    }
+ }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) { 
+    .searchbar {
+        width: 100%;   
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) { 
+    .searchbar {
+        width: 150%;
+    }
+}
+
 .collapsing {
     -webkit-transition: none;
     transition: none;
 }
 
 .user_content_modal_body {
-    font-size: 1.5em;
+    font-size: 16px;
     margin: 12px !important;
 }
 
