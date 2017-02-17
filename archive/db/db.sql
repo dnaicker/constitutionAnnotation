@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 11, 2017 at 04:05 PM
+-- Generation Time: Feb 17, 2017 at 06:22 PM
 -- Server version: 5.6.33
 -- PHP Version: 7.0.12
 
@@ -17,30 +17,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article`
+-- Table structure for table `articles`
 --
 
-CREATE TABLE `article` (
-  `id` int(11) NOT NULL,
-  `annotation` mediumtext NOT NULL,
-  `description` mediumtext NOT NULL,
-  `user` int(11) NOT NULL,
-  `date` varchar(12) NOT NULL,
-  `article_name` mediumtext NOT NULL
+CREATE TABLE `articles` (
+  `title` varchar(1024) NOT NULL,
+  `date` varchar(20) NOT NULL,
+  `comments` longtext NOT NULL,
+  `user` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `main_articles`
+-- Dumping data for table `articles`
 --
 
-CREATE TABLE `main_articles` (
-  `id` int(11) NOT NULL,
-  `article_name` varchar(1024) NOT NULL,
-  `date` varchar(12) NOT NULL,
-  `directory` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `articles` (`title`, `date`, `comments`, `user`) VALUES
+('testtitle', 'testdate', 'testcomments', 'testuser');
 
 -- --------------------------------------------------------
 
@@ -52,26 +44,13 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `roles` varchar(255) NOT NULL,
-  `article_name` int(11) NOT NULL
+  `site_roles` varchar(255) NOT NULL,
+  `profession` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `article`
---
-ALTER TABLE `article`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user` (`user`);
-
---
--- Indexes for table `main_articles`
---
-ALTER TABLE `main_articles`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -84,27 +63,7 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `article`
---
-ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `main_articles`
---
-ALTER TABLE `main_articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `article`
---
-ALTER TABLE `article`
-  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`id`) REFERENCES `main_articles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `article_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`);

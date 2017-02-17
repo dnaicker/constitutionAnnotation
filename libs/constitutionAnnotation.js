@@ -1,5 +1,20 @@
 $(document).ready(function() 
 {
+	var article = {};
+
+	//-----------------
+	//INITIALISE: Load Article on Page Load
+	function getArticle() {
+		//This will be done when page loads
+		$.ajax('php/get_article.php',{ article: "test" }, funciton(result) {
+			console.log(result);
+			//DIALOG: Add comments to html
+			// $('.comments_display').html(result.comments);
+
+			//PAGE: Display article
+			// $('body').html(result.article);
+		});
+	};
 
 	//-----------------
 	//Load Navbar
@@ -70,4 +85,16 @@ $(document).ready(function()
 			$('.paragraph').css({'background-color': 'white', 'text-decoration': 'none'});
 		}
 	});
+
+	//-----------------
+	//Send comment to database
+	$('.btn_comment_save').on('click', function() {
+		//LOGIC: Get user comments
+		$.ajax('php/update_article_comments.php', { comments: $('.comment_box').val(), article: article.name }, function(result) {
+			//DIALOG: Close
+			//DIALOG: Indicate Comment Saved
+			console.log(result);
+		});
+	});
+
  });
