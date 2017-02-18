@@ -77,7 +77,7 @@ h3 {
     font-size: 12px;
 }
 
-.paragraph:hover {
+.akn-section:hover {
     cursor: pointer;
     background-color: yellow;
     text-decoration: underline;
