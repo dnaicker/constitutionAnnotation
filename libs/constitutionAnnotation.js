@@ -6,7 +6,7 @@ $(document).ready(function()
 	//INITIALISE: Load Article on Page Load
 	function getArticle() {
 		//This will be done when page loads
-		$.ajax('php/get_article.php',{ article: "test" }, funciton(result) {
+		$.get('php/get_article.php', function(result) {
 			console.log(result);
 			//DIALOG: Add comments to html
 			// $('.comments_display').html(result.comments);
@@ -16,9 +16,17 @@ $(document).ready(function()
 		});
 	};
 
+	getArticle();
+
 	//-----------------
 	//Load Navbar
 	$( ".header" ).load( "navbar.html", function() {
+		//events for bootstrap
+	});
+
+	//-----------------
+	//Load Navbar
+	$( ".content" ).load( "docs/City_of_Cape_Town_Water_By_law_2010.html", function() {
 		//events for bootstrap
 	});
 
@@ -90,7 +98,7 @@ $(document).ready(function()
 	//Send comment to database
 	$('.btn_comment_save').on('click', function() {
 		//LOGIC: Get user comments
-		$.ajax('php/update_article_comments.php', { comments: $('.comment_box').val(), article: article.name }, function(result) {
+		$.ajax('php/save_article.php', { comments: $('.comment_box').val(), article: article.name }, function(result) {
 			//DIALOG: Close
 			//DIALOG: Indicate Comment Saved
 			console.log(result);
