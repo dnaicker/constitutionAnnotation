@@ -3,22 +3,6 @@ $(document).ready(function()
 	var article = {};
 
 	//-----------------
-	//INITIALISE: Load Article on Page Load
-	function getArticle() {
-		//This will be done when page loads
-		$.get('php/get_article.php', function(result) {
-			console.log(result);
-			//DIALOG: Add comments to html
-			// $('.comments_display').html(result.comments);
-
-			//PAGE: Display article
-			// $('body').html(result.article);
-		});
-	};
-
-	getArticle();
-
-	//-----------------
 	//Load Navbar
 	$( ".header" ).load( "navbar.html", function() {
 		//events for bootstrap
@@ -27,18 +11,29 @@ $(document).ready(function()
 	//-----------------
 	//Load Navbar
 	$( ".content" ).load( "docs/City_of_Cape_Town_Water_By_law_2010.html", function() {
-		//events for bootstrap
-		//-----------------
-		
+
 		//Show Dialog on Paragrap Click
 		$('.akn-section').on('click', function(event) {
-			console.log('click');
+
+			//-----------------
+			$.get('php/get_comments.php', function(result) {
+					console.log(result);
+
+				$.each(result, function(item) {
+					console.log(item);
+				})
+				//DIALOG: Add comments to html
+				// $('.comments_display').html(result.comments);
+
+				//PAGE: Display article
+				// $('body').html(result.article);
+			});
 			
 			//LOGIC: Remove previous selection
-			$('.akn-section').css({'background-color': 'white', 'text-decoration': 'none'});
+			// $('.akn-section').css({'background-color': 'white', 'text-decoration': 'none'});
 			
 			//LOGIC: Highlight current selection
-			$(this).css({'background-color': 'yellow', 'text-decoration': 'underline'});
+			// $(this).css({'background-color': 'yellow', 'text-decoration': 'underline'});
 
 			var build_dialog_dynamically = [];
 			build_dialog_dynamically.push('<div id="myModal" class="modal" role="dialog" tabindex="-1">');
