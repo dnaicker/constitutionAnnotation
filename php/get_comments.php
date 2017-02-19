@@ -14,13 +14,13 @@ if ($conn->connect_error) {
 // die "Connected successfully";
 
 // Get Comments
-$sql = "SELECT * FROM articles";
+$sql = "SELECT * FROM articles WHERE title = 'City_of_Cape_Town_Water_By_law_2010' ";
 $result = $conn->query($sql);
 
 if($result->num_rows > 0) {
 	//output data
 	while($row = $result->fetch_assoc()) {
-		echo json_encode($row["comments"]);
+		echo $row["comments"];
 	}
 } else {
 	echo "0 results";
