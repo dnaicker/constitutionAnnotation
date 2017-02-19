@@ -92,7 +92,9 @@ $(document).ready(function()
 						}
 					);
 
-					article["comments"] = JSON.stringify(article["comments"]);
+					article["comments"] = JSON.stringify(_comments);
+
+					// console.log(art	icle["comments"]);
 
 					//Send comment to db
 					$.post(
