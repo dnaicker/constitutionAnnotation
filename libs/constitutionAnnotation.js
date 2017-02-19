@@ -15,17 +15,26 @@ $(document).ready(function()
 		//Show Dialog on Paragrap Click
 		$('.akn-section').on('click', function(event) {
 			user_comments = [];
+			article = [];
 
 			//-----------------
 			$.get('php/get_comments.php', function(result) {
-				json_arr = jQuery.parseJSON(result);
+				article = jQuery.parseJSON(result);
+				user_comments = [];
 
-				$.each(json_arr, function(key, value) {
-					//DIALOG: Add comments to html
-					$('.comments_display').html(value.comment);
-					user_comments.push(value.comment);
-				})
+				$.each(article, function(key, value) {
+					if(key == 'comments')
+					{
+						comments_json = jQuery.parseJSON(value);
+						
+						$.each(comments_json, function(key, val) 
+						{
+							user_comments.push("<p>" + val.comment + "</p>" + "<span class='comment'><b>User</b>: " + val.user + ", <b>Date</b>: " + val.date +  "</span><br />");
+						});
+					}
+				});
 
+				
 				var build_dialog_dynamically = [];
 				build_dialog_dynamically.push('<div id="myModal" class="modal" role="dialog" tabindex="-1">');
 				build_dialog_dynamically.push('<div class="modal-dialog modal-lg">');
@@ -35,17 +44,20 @@ $(document).ready(function()
 				build_dialog_dynamically.push('<h3 class="modal-title" style="color: #3E606F">Additional Information</h3>');
 				build_dialog_dynamically.push('</div>');
 				build_dialog_dynamically.push('<div class="modal-body user_content_modal_body" style="max-height:250px; overflow-y: auto">');
+				//comment display
 				build_dialog_dynamically.push('<p>');
 				build_dialog_dynamically.push(user_comments.join(''));
 				build_dialog_dynamically.push('</p>');
 				build_dialog_dynamically.push('</div>');
 				build_dialog_dynamically.push('<div class="modal-footer" style="border: none">');
 				build_dialog_dynamically.push('<h3 class="pull-left" style="color: #3E606F">Comment</h3>');
-				build_dialog_dynamically.push('<textarea class="form-control" rows="5" id="comment" style="resize: none;   "></textarea>');
+				//comment input
+				build_dialog_dynamically.push('<textarea class="form-control comment_input" rows="5" id="comment" style="resize: none;   "></textarea>');
 				build_dialog_dynamically.push('<br/>');
 				build_dialog_dynamically.push('<button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-paperclip"></span> Attachment</button>');
 				build_dialog_dynamically.push('<button data-dismiss="modal" class="btn btn-default"><span class="fa fa-times"></span> Cancel</button>');
-				build_dialog_dynamically.push('<button type="button" class="btn btn-success" data-dismiss="modal"><span class="fa fa-check"></span> Save</button>');
+				//comment insert
+				build_dialog_dynamically.push('<button type="button" class="btn btn-success insert_comment" data-dismiss="modal"><span class="fa fa-check"></span> Save</button>');
 				build_dialog_dynamically.push('</div>');
 				build_dialog_dynamically.push('</div>');
 				build_dialog_dynamically.push('</div>');
@@ -68,6 +80,29 @@ $(document).ready(function()
 
 				//USER STORIES: Add new Content
 				$('user_content_modal_body').append();
+
+				$('.insert_comment').on('click', function() {
+					var _comments = JSON.parse(article["comments"]);
+
+					_comments.push(
+						{
+							"user": "Denver", //session variable
+							"date": "19-02-2017",
+							"comment": $('.comment_input').val()
+						}
+					);
+
+					article["comments"] = JSON.stringify(article["comments"]);
+
+					//Send comment to db
+					$.post(
+						'php/save_comments.php', 
+						JSON.stringify(article),
+						function(result) {
+							console.log(result);
+						}
+					);
+				})
 			});
 		});
 
@@ -79,19 +114,5 @@ $(document).ready(function()
 				$('.akn-section').css({'background-color': 'white', 'text-decoration': 'none'});
 			}
 		});
-
-		//-----------------
-		//Send comment to database
-		$('.btn_comment_save').on('click', function() {
-			//LOGIC: Get user comments
-			$.ajax('php/save_article.php', { comments: $('.comment_box').val(), article: article.name }, function(result) {
-				//DIALOG: Close
-				//DIALOG: Indicate Comment Saved
-				console.log(result);
-			});
-		});
-
 	});
-
-
  });

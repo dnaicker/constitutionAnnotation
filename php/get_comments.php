@@ -20,7 +20,7 @@ $result = $conn->query($sql);
 if($result->num_rows > 0) {
 	//output data
 	while($row = $result->fetch_assoc()) {
-		echo $row["comments"];
+		echo json_encode($row);
 	}
 } else {
 	echo "0 results";

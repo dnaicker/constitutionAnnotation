@@ -31,6 +31,12 @@
     }
 }
 
+.comment {
+    font-family: 'Bree Serif', serif;
+    font-size: 10px;
+    /*font-style: italic;*/
+}
+
 .collapsing {
     -webkit-transition: none;
     transition: none;
