@@ -36,8 +36,14 @@ $(document).ready(function()
 						$.each(comments_json, function(key, val) 
 						{
 							//only show if section is relevant
-							if(self.section_id == val.section)
-								user_comments.push("<p>" + val.comment + "</p>" + "<span class='comment'><b>User</b>: " + val.user + ", <b>Date</b>: " + val.date +  "</span><br />");
+							if(val.section)
+							{								
+								if(self.section_id == val.section)
+								{
+									user_comments.push("<p>" + val.comment + "</p>" + "<span class='comment'><b>User</b>: " + val.user + ", <b>Date</b>: " + val.date +  "</span><br />");
+								}
+							}
+
 						});
 					}
 				});
@@ -97,7 +103,7 @@ $(document).ready(function()
 						{
 							"user": "Denver", //session variable
 							"date": "19-02-2017",
-							"comment": $('.comment_input').val(),
+							"comment": $('.comment_input').val().replace(/(\r\n|\n|\r)/gm,""),
 							"section": self.section_id
 						}
 					);
