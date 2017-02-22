@@ -8,20 +8,25 @@ $(document).ready(function()
 		//events for bootstrap
 	});
 
+	//both chapters and sections bleh
+
 	//-----------------
 	//Load Navbar
 	$( ".content" ).load( "docs/City_of_Cape_Town_Water_By_law_2010.html", function() {
 
 		//Show Dialog on Paragrap Click
-		$('.akn-section').on('click', function(event) {
+		$('.akn-chapter').on('click', function(event) {
 			user_comments = [];
 			article = [];
+
+			var section_id = $('.akn-chapter').attr('id');
 
 			//-----------------
 			$.get('php/get_comments.php', function(result) {
 				article = jQuery.parseJSON(result);
 				user_comments = [];
 
+				//display comments
 				$.each(article, function(key, value) {
 					if(key == 'comments')
 					{
@@ -29,7 +34,10 @@ $(document).ready(function()
 						
 						$.each(comments_json, function(key, val) 
 						{
-							user_comments.push("<p>" + val.comment + "</p>" + "<span class='comment'><b>User</b>: " + val.user + ", <b>Date</b>: " + val.date +  "</span><br />");
+							//only show if section is relevant
+							console.log(val.section);
+							if(section_id == val.section)
+								user_comments.push("<p>" + val.comment + "</p>" + "<span class='comment'><b>User</b>: " + val.user + ", <b>Date</b>: " + val.date +  "</span><br />");
 						});
 					}
 				});
@@ -81,6 +89,7 @@ $(document).ready(function()
 				//USER STORIES: Add new Content
 				$('user_content_modal_body').append();
 
+				//save comments
 				$('.insert_comment').on('click', function() {
 					var _comments = JSON.parse(article["comments"]);
 
@@ -88,7 +97,8 @@ $(document).ready(function()
 						{
 							"user": "Denver", //session variable
 							"date": "19-02-2017",
-							"comment": $('.comment_input').val()
+							"comment": $('.comment_input').val(),
+							"section": $('.akn-chapter').attr('id')
 						}
 					);
 
@@ -113,7 +123,7 @@ $(document).ready(function()
 		$('html').on('click', function(event) {
 			if ( !$(event.target).hasClass('paragraph')) 
 			{
-				$('.akn-section').css({'background-color': 'white', 'text-decoration': 'none'});
+				$('.akn-chapter').css({'background-color': 'white', 'text-decoration': 'none'});
 			}
 		});
 	});
