@@ -1,6 +1,7 @@
 $(document).ready(function() 
 {
 	var article = {};
+	var self = this;
 
 	//-----------------
 	//Load Navbar
@@ -8,23 +9,23 @@ $(document).ready(function()
 		//events for bootstrap
 	});
 
-	//both chapters and sections bleh
-
 	//-----------------
 	//Load Navbar
 	$( ".content" ).load( "docs/City_of_Cape_Town_Water_By_law_2010.html", function() {
 
 		//Show Dialog on Paragrap Click
-		$('.akn-chapter').on('click', function(event) {
+		$('.akn-section').on('click', function(event) {
 			user_comments = [];
 			article = [];
-
-			var section_id = $('.akn-chapter').attr('id');
+			self.section_id = $(this).attr('id');
 
 			//-----------------
 			$.get('php/get_comments.php', function(result) {
 				article = jQuery.parseJSON(result);
 				user_comments = [];
+
+				
+
 
 				//display comments
 				$.each(article, function(key, value) {
@@ -35,8 +36,7 @@ $(document).ready(function()
 						$.each(comments_json, function(key, val) 
 						{
 							//only show if section is relevant
-							console.log(val.section);
-							if(section_id == val.section)
+							if(self.section_id == val.section)
 								user_comments.push("<p>" + val.comment + "</p>" + "<span class='comment'><b>User</b>: " + val.user + ", <b>Date</b>: " + val.date +  "</span><br />");
 						});
 					}
@@ -98,7 +98,7 @@ $(document).ready(function()
 							"user": "Denver", //session variable
 							"date": "19-02-2017",
 							"comment": $('.comment_input').val(),
-							"section": $('.akn-chapter').attr('id')
+							"section": self.section_id
 						}
 					);
 
@@ -123,7 +123,7 @@ $(document).ready(function()
 		$('html').on('click', function(event) {
 			if ( !$(event.target).hasClass('paragraph')) 
 			{
-				$('.akn-chapter').css({'background-color': 'white', 'text-decoration': 'none'});
+				$('.akn-section').css({'background-color': 'white', 'text-decoration': 'none'});
 			}
 		});
 	});
