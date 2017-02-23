@@ -2,8 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <!-- hamburger menu -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
-            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -13,23 +12,30 @@
             <a class="navbar-brand" href="#"><span class="fa fa-balance-scale"></span></a>
         </div>
 
+        <!-- menu items on collapse or normal -->
         <div class="collapse navbar-collapse no-transition" id="bs-example-navbar-collapse-1">
-            <!-- menu dropdown -->
+            <!-- =================== -->
+            <!-- left side of navbar -->
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Theme 1</a></li>
-                        <li><a href="#">Theme 2</a></li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Articles 
+                        <span class="caret"></span>
+                    </a>
+                    <!-- build these dynamically -->
+                    <ul class="dropdown-menu navbar_categories">
                     </ul>
                 </li>
             </ul>
             <!-- search -->
             <form class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input type="text" class="form-control searchbar" placeholder="Search" >
+                    <input type="text" class="form-control searchbar" placeholder="Search">
                 </div>
             </form>
+            
+            <!-- =================== -->
+            <!-- right side of navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -40,10 +46,16 @@
                     <!-- user management -->
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="user_profile.html"><span class="fa fa-pencil"></span>  Profile</a>
+                            <a href="user_profile.html">
+                                <span class="fa fa-pencil"></span> 
+                                Profile
+                             </a>
                         </li>
                         <li>
-                            <a href="#"><span class="fa fa-sign-out"></span>  Logout</a>
+                            <a href="#">
+                                <span class="fa fa-sign-out"></span>  
+                                Logout
+                            </a>
                         </li>
                     </ul>
                 </li>
