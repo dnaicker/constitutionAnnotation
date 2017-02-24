@@ -3,6 +3,16 @@ $(document).ready(function()
 	var article = {};
 	var directories = {};
 	var self = this;
+	self.navigate_to_directory = "";
+
+
+	// $( ".content" ).load('docs/City_of_Cape_Town_Water_By_law_2010.html', function() {
+	// 	core_events();
+	// });
+
+
+	//if the user navigates to a new link
+	//this should just load the document
 
 	$.get('php/get_directories.php', function(result) {
 		directories = jQuery.parseJSON("[" + result.substring(0, result.length-1) + "]" );
@@ -17,7 +27,7 @@ $(document).ready(function()
 				var dir = item.directory;
 
 				navbar_links.push('<li>');
-				navbar_links.push('<a href="' + dir + '">');
+				navbar_links.push('<a href="#" class="navigate_to_doc" directory="'+ dir +'">');
 				navbar_links.push(dir.substring(dir.indexOf('/')+1, dir.indexOf('.html')));
 				navbar_links.push('</a>');
 				navbar_links.push('</li>');
@@ -29,21 +39,30 @@ $(document).ready(function()
 			//-----------------
 			//Load Navbar
 			//load first file in directory
-			$( ".content" ).load(directories[0].directory, function() {
+			$('.navigate_to_doc').on('click', function() {
+				self.navigate_to_directory = $(this).attr('directory');
+				console.log(self.navigate_to_directory);
+				$(".content").empty();
+				$( ".content" ).load(self.navigate_to_directory, function() {
+					core_events();
+				})
+			});
 
-				//Show Dialog on Paragrap Click
+		});
+	});
+
+	function core_events() {
+		//Show Dialog on Paragrap Click
 				$('.akn-section').on('click', function(event) {
 					user_comments = [];
 					article = [];
 					self.section_id = $(this).attr('id');
 
 					//-----------------
+					//TODO: send through params
 					$.get('php/get_comments.php', function(result) {
 						article = jQuery.parseJSON(result);
 						user_comments = [];
-
-						
-
 
 						//display comments
 						$.each(article, function(key, value) {
@@ -65,7 +84,6 @@ $(document).ready(function()
 								});
 							}
 						});
-
 						
 						var build_dialog_dynamically = [];
 						build_dialog_dynamically.push('<div id="myModal" class="modal" role="dialog" tabindex="-1">');
@@ -150,9 +168,28 @@ $(document).ready(function()
 						$('.akn-section').css({'background-color': 'white', 'text-decoration': 'none'});
 					}
 				});
-			});
-		});
-	});
+				//-----------------
+				$(".login").on('click', function() {
+					//show dialog
+					//return result decides whether to change navbar and set cache
+				});
+				//-----------------
+				$(".register").on('click', function() {
+					console.log('click');
+					//display dialog
+					$('.content').load('html/registration_dialog.html', function() {
 
+						//invoke dialog
+						$('#registerModal').modal('show');
 
- });
+						$('.register_btn').on('click', function() {
+							//send php call to send email
+							$.post('php/send_email.php', { username: _username, password: _password },function(results) {
+									//display notification	
+									//admin adds user
+							});	
+						});
+					});
+				});
+			};
+});
