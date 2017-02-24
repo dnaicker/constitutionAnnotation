@@ -61,7 +61,6 @@ $(document).ready(function()
 					article = [];
 					self.section_id = $(this).attr('id');
 
-					console.log(self.article_title);
 					//-----------------
 					//TODO: send through params
 					var temp = { title : self.article_title };

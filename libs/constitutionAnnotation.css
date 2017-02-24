@@ -83,10 +83,10 @@ h3 {
     font-size: 12px;
 }
 
-.akn-section:hover {
+.akn-section:hover * {
     cursor: pointer;
     background-color: yellow;
-    text-decoration: underline;
+    /*text-decoration: text-underline-position: e;*/
 }
 
 ::-webkit-scrollbar {
