@@ -4,6 +4,7 @@ $(document).ready(function()
 	var directories = {};
 	var self = this;
 	self.navigate_to_directory = "";
+	self.article_title = "";
 
 
 	// $( ".content" ).load('docs/City_of_Cape_Town_Water_By_law_2010.html', function() {
@@ -25,10 +26,11 @@ $(document).ready(function()
 			//build navbar directory structure
 			$.	each(directories, function(index, item) {
 				var dir = item.directory;
+				var dir_name = dir.substring(dir.indexOf('/')+1, dir.indexOf('.html'));
 
 				navbar_links.push('<li>');
 				navbar_links.push('<a href="#" class="navigate_to_doc" directory="'+ dir +'">');
-				navbar_links.push(dir.substring(dir.indexOf('/')+1, dir.indexOf('.html')));
+				navbar_links.push(dir_name);
 				navbar_links.push('</a>');
 				navbar_links.push('</li>');
 			});
@@ -41,13 +43,14 @@ $(document).ready(function()
 			//load first file in directory
 			$('.navigate_to_doc').on('click', function() {
 				self.navigate_to_directory = $(this).attr('directory');
+				self.article_title = self.navigate_to_directory.substring(self.navigate_to_directory.indexOf('/')+1, self.navigate_to_directory.indexOf('.html'));
+
 				console.log(self.navigate_to_directory);
 				$(".content").empty();
 				$( ".content" ).load(self.navigate_to_directory, function() {
 					core_events();
 				})
 			});
-
 		});
 	});
 
@@ -58,9 +61,12 @@ $(document).ready(function()
 					article = [];
 					self.section_id = $(this).attr('id');
 
+					console.log(self.article_title);
 					//-----------------
 					//TODO: send through params
-					$.get('php/get_comments.php', function(result) {
+					var temp = { title : self.article_title };
+
+					$.post('php/get_comments.php', JSON.stringify(temp), function(result) {
 						article = jQuery.parseJSON(result);
 						user_comments = [];
 
