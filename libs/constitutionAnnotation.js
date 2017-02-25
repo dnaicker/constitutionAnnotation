@@ -38,13 +38,89 @@ $(document).ready(function()
 			$('.navigate_to_doc').on('click', function() {
 				self.navigate_to_directory = $(this).attr('directory');
 				self.article_title = self.navigate_to_directory.substring(self.navigate_to_directory.indexOf('/')+1, self.navigate_to_directory.indexOf('.html'));
-
-				console.log(self.navigate_to_directory);
 				$(".content").empty();
 				$( ".content" ).load(self.navigate_to_directory, function() {
 					core_events();
 				})
 			});
+
+			//-----------------
+			$("#login").on('click', function() {
+				//show dialog
+				//return result decides whether to change navbar and set cache
+				$('.content').load('html/login.html', function() {
+
+					//invoke dialog
+					$('#loginModal').modal('show');
+
+					$('.login_btn').on('click', function() {
+						var _username = $('#email_login').val();
+						var _password = $('#password_login').val();
+
+						$.post('php/login.php', JSON.stringify({ username: _username, password: _password }),function(results) {
+							console.log(results);
+							if(results == 'Welcome you are logged in')
+							{
+								$('.modal-body').empty();
+								var result = [];
+								result.push('<div class="alert alert-success">');
+								result.push('<strong>Success!</strong> Welcome you are logged in.');
+								result.push('</div>');
+								$('.modal-body').html(result.join(''));
+								setTimeout(function() { $('#loginModal').modal('hide'); }, 1000);
+							}
+							else
+							{
+								var result = [];
+								result.push('<br/><div class="alert alert-danger">');
+								result.push('<strong>Error: </strong> The user details you entered are incorrect.');
+								result.push('</div>');
+								$('.modal-body').append(result.join(''));
+								setTimeout(function() { $('.alert-danger').remove(); }, 1000);
+							}
+						});
+					});
+				});
+			});
+
+			//-----------------
+			$("#register").on('click', function() {
+				//display dialog
+				$('.content').load('html/registration.html', function() {
+
+					//invoke dialog
+					$('#registerModal').modal('show');
+
+					$('.register_btn').on('click', function() {
+						var _username = $('#email_login').val();
+						var _password = $('#password_login').val();
+
+						$.post('php/registration.php', JSON.stringify({ username: _username, password: _password }),function(results) {
+							console.log(results);
+							if(results == 'You are now registered')
+							{
+								$('.modal-body').empty();
+								var result = [];
+								result.push('<div class="alert alert-success">');
+								result.push('<strong>Success!</strong> Welcome you can now login.');
+								result.push('</div>');
+								$('.modal-body').html(result.join(''));
+								setTimeout(function() { $('#registerModal').modal('hide'); }, 1000);
+							}
+							else
+							{
+								var result = [];
+								result.push('<div class="alert alert-danger">');
+								result.push('<strong>Error: </strong> The user could not be found.');
+								result.push('</div>');
+								$('.modal-body').html(result.join(''));
+								setTimeout(function() { $('.alert-danger').remove(); }, 1000);
+							}
+						});	
+					});
+				});
+			});
+
 		});
 	});
 
@@ -162,38 +238,6 @@ $(document).ready(function()
 								}
 							);
 						})
-					});
-				});
-
-				//-----------------
-				//Remove Style of Paragraph
-				$('html').on('click', function(event) {
-					if ( !$(event.target).hasClass('paragraph')) 
-					{
-						$('.akn-section').css({'background-color': 'white', 'text-decoration': 'none'});
-					}
-				});
-				//-----------------
-				$(".login").on('click', function() {
-					//show dialog
-					//return result decides whether to change navbar and set cache
-				});
-				//-----------------
-				$(".register").on('click', function() {
-					console.log('click');
-					//display dialog
-					$('.content').load('html/registration_dialog.html', function() {
-
-						//invoke dialog
-						$('#registerModal').modal('show');
-
-						$('.register_btn').on('click', function() {
-							//send php call to send email
-							$.post('php/send_email.php', { username: _username, password: _password },function(results) {
-									//display notification	
-									//admin adds user
-							});	
-						});
 					});
 				});
 			};
