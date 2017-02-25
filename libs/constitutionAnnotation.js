@@ -68,6 +68,10 @@ $(document).ready(function()
 								result.push('</div>');
 								$('.modal-body').html(result.join(''));
 								setTimeout(function() { $('#loginModal').modal('hide'); }, 1000);
+
+								//set local cache user varaibles
+
+								//create new navbar with logout
 							}
 							else
 							{
