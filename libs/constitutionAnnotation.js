@@ -7,14 +7,8 @@ $(document).ready(function()
 	self.article_title = "";
 
 
-	// $( ".content" ).load('docs/City_of_Cape_Town_Water_By_law_2010.html', function() {
-	// 	core_events();
-	// });
-
-
 	//if the user navigates to a new link
 	//this should just load the document
-
 	$.get('php/get_directories.php', function(result) {
 		directories = jQuery.parseJSON("[" + result.substring(0, result.length-1) + "]" );
 
@@ -55,7 +49,7 @@ $(document).ready(function()
 	});
 
 	function core_events() {
-		//Show Dialog on Paragrap Click
+			//Show Dialog on Paragrap Click
 				$('.akn-section').on('click', function(event) {
 					user_comments = [];
 					article = [];
@@ -140,11 +134,18 @@ $(document).ready(function()
 						$('.insert_comment').on('click', function() {
 							var _comments = JSON.parse(article["comments"]);
 
+							//what happens if a comment is not saved?
+							//should i have a local log?
+							var comment_txt = $('.comment_input').val().replace(/(\r\n|\n|\r)/gm,"");
+							comment_txt = comment_txt.replace(/[^a-zA-Z ]/g, "");
+
+							console.log(comment_txt);
+							
 							_comments.push(
 								{
 									"user": "Denver", //session variable
 									"date": "19-02-2017",
-									"comment": $('.comment_input').val().replace(/(\r\n|\n|\r)/gm,""),
+									"comment": comment_txt,
 									"section": self.section_id
 								}
 							);
