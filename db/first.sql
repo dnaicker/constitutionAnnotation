@@ -8,3 +8,7 @@ INSERT INTO `articles`(`title`, `date`, `comments`, `directory`) VALUES
 UPDATE articles SET comments='[ { "user": "Denver", "comment": "test comment", "date":"17-02-2017" } ]' WHERE title='City_of_Cape_Town_Water_By_law_2010';
 
 select title from articles where title='City_of_Cape_Town_Water_By_law_2010';
+
+
+INSERT INTO `users`(`id`, `username`, `password`, `site_roles`, `profession`) VALUES (0,'Denver','test','admin','amateur');
+INSERT INTO `users`(`id`, `username`, `password`, `site_roles`, `profession`) VALUES (0,'user1','test','admin','test');

@@ -21,7 +21,7 @@ $(document).ready(function()
 			$.	each(directories, function(index, item) {
 				var dir = item.directory;
 				var dir_name = dir.substring(dir.indexOf('/')+1, dir.indexOf('.html'));
-
+				dir_name = dir_name.replace(/_/g, " ");
 				navbar_links.push('<li>');
 				navbar_links.push('<a href="#" class="navigate_to_doc" directory="'+ dir +'">');
 				navbar_links.push(dir_name);
@@ -76,7 +76,7 @@ $(document).ready(function()
 									{								
 										if(self.section_id == val.section)
 										{
-											user_comments.push("<p>" + val.comment + "</p>" + "<span class='comment'><b>User</b>: " + val.user + ", <b>Date</b>: " + val.date +  "</span><br />");
+											user_comments.push("<p>" + val.comment + "<br/><div class='comment'>" + val.date + "<span style='padding-right: 5px;'></span> " + val.user +  "</div></p>");
 										}
 									}
 
@@ -92,16 +92,14 @@ $(document).ready(function()
 						build_dialog_dynamically.push('<button type="button" class="close" data-dismiss="modal">&times;</button>');
 						build_dialog_dynamically.push('<h3 class="modal-title" style="color: #3E606F">Additional Information</h3>');
 						build_dialog_dynamically.push('</div>');
-						build_dialog_dynamically.push('<div class="modal-body user_content_modal_body" style="max-height:250px; overflow-y: auto">');
+						build_dialog_dynamically.push('<div class="modal-body user_content_modal_body" style="max-height:250px; overflow-y: auto; word-wrap: break-word;">');
 						//comment display
-						build_dialog_dynamically.push('<p>');
 						build_dialog_dynamically.push(user_comments.join(''));
-						build_dialog_dynamically.push('</p>');
 						build_dialog_dynamically.push('</div>');
 						build_dialog_dynamically.push('<div class="modal-footer" style="border: none">');
 						build_dialog_dynamically.push('<h3 class="pull-left" style="color: #3E606F">Comment</h3>');
 						//comment input
-						build_dialog_dynamically.push('<textarea class="form-control comment_input" rows="5" id="comment" style="resize: none;   "></textarea>');
+						build_dialog_dynamically.push('<textarea class="form-control comment_input" rows="5" id="comment" style="resize: none;"></textarea>');
 						build_dialog_dynamically.push('<br/>');
 						build_dialog_dynamically.push('<button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-paperclip"></span> Attachment</button>');
 						build_dialog_dynamically.push('<button data-dismiss="modal" class="btn btn-default"><span class="fa fa-times"></span> Cancel</button>');
@@ -136,15 +134,16 @@ $(document).ready(function()
 
 							//what happens if a comment is not saved?
 							//should i have a local log?
-							var comment_txt = $('.comment_input').val().replace(/(\r\n|\n|\r)/gm,"");
-							comment_txt = comment_txt.replace(/[^a-zA-Z ]/g, "");
+							var date_time = new Date().toLocaleDateString("nl",{year:"2-digit", month:"2-digit", day:"2-digit", hour: "2-digit", minute: "2-digit"});
+								var comment_txt = $('.comment_input').val().replace(/(\r\n|\n|\r)/gm,"");
+							comment_txt = comment_txt.replace(/[^a-zA-Z0-9 ]/g, "");
 
-							console.log(comment_txt);
 							
+
 							_comments.push(
 								{
 									"user": "Denver", //session variable
-									"date": "19-02-2017",
+									"date": date_time,
 									"comment": comment_txt,
 									"section": self.section_id
 								}

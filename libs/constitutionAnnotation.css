@@ -34,7 +34,6 @@
 .comment {
     font-family: 'Bree Serif', serif;
     font-size: 10px;
-    /*font-style: italic;*/
 }
 
 .collapsing {
@@ -55,8 +54,17 @@ body {
     font-family: 'Quicksand', serif;
 }
 
+h1 {
+    color: #2D81A3  ;
+}
+
+h2 {
+    color: #308AAD  ;
+}
+
 h3 {
     font-family: 'Bree Serif', serif;
+    color: #4E93AD;
 }
 
 .footer {
@@ -100,4 +108,17 @@ h3 {
 
 ::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.3);
+}
+
+.comment {
+    color: #F29494;
+    margin-top: -5px;
+    margin-right: 15px;
+    text-align: right;
+}
+
+.comment_input {
+    border-radius: 0px;
+    border: 1px solid #A0C7D4;
+    box-shadow: none;
 }
