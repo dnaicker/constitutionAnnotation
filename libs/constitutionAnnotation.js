@@ -47,7 +47,7 @@ $(document).ready(function()
 		});
 
 		//if session username not blank
-		if(sessionStorage.getItem('username').length > 0)
+		if(sessionStorage.getItem('username'))
 		{
 			set_session();
 		}
@@ -55,16 +55,10 @@ $(document).ready(function()
 		{
 			console.log('session not set');
 
-			$('#login_menu').empty();
+			$('.login_menu').empty();
 
 			var navbar_links2 = [];
 
-			navbar_links2.push('<li class="dropdown">');
-			navbar_links2.push('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">');
-			navbar_links2.push('<span class="fa fa-user" style="font-size: 18px;"></span>');
-			navbar_links2.push('<span class="caret"></span>');
-			navbar_links2.push('</a>');
-			navbar_links2.push('<ul class="dropdown-menu login_menu">');
 			navbar_links2.push('<li id="register">');
 			navbar_links2.push('<a href="#" >');
 			navbar_links2.push('<span class="fa fa-pencil"></span> ');
@@ -77,11 +71,8 @@ $(document).ready(function()
 			navbar_links2.push('Login');
 			navbar_links2.push('</a>');
 			navbar_links2.push('</li>');
-			navbar_links2.push('</ul>');
-			navbar_links2.push('</li>');
-			
-			$('#login_menu').html(navbar_links2.join(''));
-
+				
+			$('.login_menu').html(navbar_links2.join(''));
 
 			//-----------------
 			$("#login").on('click', function() {
@@ -182,8 +173,8 @@ $(document).ready(function()
 		$('.login_menu').html(new_navbar.join(''));
 
 		$('#logout').on('click', function() {
-			console.log('logout');
-			sessionStorage.setItem('username', '');
+			sessionStorage.removeItem('username');
+			sessionStorage.clear();
 			self.load_navbar();
 		});
 	};
@@ -256,52 +247,48 @@ $(document).ready(function()
 				//DIALOG: Invoke show event trigger
 				$('#myModal').modal('show');
 
-				//COMMENT: Remove previous
-				$('comment').val('');
+				if(!sessionStorage.getItem('username')) 
+					$('.comment_input').attr("disabled",true);		
+				else
+					$('.comment_input').attr("disabled",false);		
 
-				//COMMENT: Retrieve New
-				$('comment').val('');
 
-				//USER STORIES: Remove previous
-				$('user_content_modal_body').val('');
+				//disable input
+				if(sessionStorage.getItem('username')) 
+				{
+					//save comments
+					$('.insert_comment').on('click', function() {				
+						var _comments = JSON.parse(self.article["comments"]);
 
-				//USER STORIES: Add new Content
-				$('user_content_modal_body').append();
+						//what happens if a comment is not saved?
+						//should i have a local log?
+						var date_time = new Date().toLocaleDateString("nl",{year:"2-digit", month:"2-digit", day:"2-digit", hour: "2-digit", minute: "2-digit"});
+							var comment_txt = $('.comment_input').val().replace(/(\r\n|\n|\r)/gm,"");
+						comment_txt = comment_txt.replace(/[^a-zA-Z0-9 ]/g, "");
 
-				//save comments
-				$('.insert_comment').on('click', function() {
-					var _comments = JSON.parse(self.article["comments"]);
+						_comments.push(
+							{
+								"user": sessionStorage.getItem('username'), //session variable
+								"date": date_time,
+								"comment": comment_txt,
+								"section": self.section_id
+							}
+						);
 
-					//what happens if a comment is not saved?
-					//should i have a local log?
-					var date_time = new Date().toLocaleDateString("nl",{year:"2-digit", month:"2-digit", day:"2-digit", hour: "2-digit", minute: "2-digit"});
-						var comment_txt = $('.comment_input').val().replace(/(\r\n|\n|\r)/gm,"");
-					comment_txt = comment_txt.replace(/[^a-zA-Z0-9 ]/g, "");
+						self.article["comments"] = JSON.stringify(_comments);
 
-					
+						// console.log(art	icle["comments"]);
 
-					_comments.push(
-						{
-							"user": "Denver", //session variable
-							"date": date_time,
-							"comment": comment_txt,
-							"section": self.section_id
-						}
-					);
-
-					self.article["comments"] = JSON.stringify(_comments);
-
-					// console.log(art	icle["comments"]);
-
-					//Send comment to db
-					$.post(
-						'php/save_comments.php', 
-						JSON.stringify(self.article),
-						function(result) {
-							console.log(result);
-						}
-					);
-				})
+						//Send comment to db
+						$.post(
+							'php/save_comments.php', 
+							JSON.stringify(self.article),
+							function(result) {
+								console.log(result);
+							}
+						);
+					});
+				}
 			});
 		});
 	};
