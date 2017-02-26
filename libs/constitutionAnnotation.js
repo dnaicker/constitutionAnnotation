@@ -220,19 +220,18 @@ $(document).ready(function()
 				build_dialog_dynamically.push('<div class="modal-dialog modal-lg">');
 				build_dialog_dynamically.push('<div class="modal-content modalheader">');
 				build_dialog_dynamically.push('<div class="modal-header" style="border: none">');
-				build_dialog_dynamically.push('<button type="button" class="close" data-dismiss="modal">&times;</button>');
-				build_dialog_dynamically.push('<h3 class="modal-title" style="color: #3E606F">Additional Information</h3>');
+				build_dialog_dynamically.push('<h3 class="modal-title" style="color: #3E606F">Information</h3>');
 				build_dialog_dynamically.push('</div>');
-				build_dialog_dynamically.push('<div class="modal-body user_content_modal_body" style="max-height:250px; overflow-y: auto; word-wrap: break-word;">');
+				build_dialog_dynamically.push('<div class="modal-body user_content_modal_body" style="max-height:190px; overflow-y: auto; word-wrap: break-word;">');
 				//comment display
 				build_dialog_dynamically.push(user_comments.join(''));
 				build_dialog_dynamically.push('</div>');
 				build_dialog_dynamically.push('<div class="modal-footer" style="border: none">');
 				build_dialog_dynamically.push('<h3 class="pull-left" style="color: #3E606F">Comment</h3>');
 				//comment input
-				build_dialog_dynamically.push('<textarea class="form-control comment_input" rows="5" id="comment" style="resize: none;"></textarea>');
+				build_dialog_dynamically.push('<textarea class="form-control comment_input" rows="3" id="comment" style="resize: none;"></textarea>');
 				build_dialog_dynamically.push('<br/>');
-				build_dialog_dynamically.push('<button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-paperclip"></span> Attachment</button>');
+				build_dialog_dynamically.push('<button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-paperclip"></span> </button>');
 				build_dialog_dynamically.push('<button data-dismiss="modal" class="btn btn-default"><span class="fa fa-times"></span> Cancel</button>');
 				//comment insert
 				build_dialog_dynamically.push('<button type="button" class="btn btn-success insert_comment" data-dismiss="modal"><span class="fa fa-check"></span> Save</button>');
